@@ -26,8 +26,8 @@ try:
     term = 'pantheon 1.2 m around the oculus'
     n_images = 20
     i = 1
-    res = myspider.querythisword(term,'%04d'%i,n_images)
+    res = myspider.querythisword(term, n_images)
     print res
 except Exception, e:
-    print 'Caught exception %s, so sleeping for a bit' % (e,)
+    print 'Caught exception %s, so sleeping for a bit' % (e)
     

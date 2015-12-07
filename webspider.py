@@ -36,6 +36,7 @@ class webspider:
     #get image list from main web query
     def getimagelist(self,term,n_images):
         queryurl = self.mainweb_head + term + self.mainweb_tail
+        print queryurl
         #print queryurl
         content = self.openurl(queryurl)
         #print content
@@ -98,7 +99,7 @@ class webspider:
                 self.jsonresult += '\n'    
             
     #start to write all json-like string
-    def generatejsonstring(self,dirname,n_images):
+    def generatejsonstring(self,n_images):
         headstr = '{\"responseData\": {\n \"results\": [\n'
         tailstr = ' ]}\n}'
         self.jsonresult += headstr;
@@ -106,9 +107,10 @@ class webspider:
         self.jsonresult += tailstr;
         
     #entrance
-    def querythisword(self, term, dirname, n_images):
-        term = term.replace(' ','+')
+    def querythisword(self, term, n_images):
+        from urllib import quote_plus
+        term=quote_plus(term)
         self.getimagelist(term,n_images)
-        self.generatejsonstring(dirname,n_images)
+        self.generatejsonstring(n_images)
         return self.jsonresult
     
