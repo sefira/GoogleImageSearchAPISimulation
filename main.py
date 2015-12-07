@@ -7,6 +7,9 @@
 #######################################
 
 import webspider
+import json
+import os
+import urllib
 
 print u"""
 --------------------------------------- 
@@ -19,15 +22,42 @@ print u"""
 
 print u'start project：'
 
-#capturing web
-print u'capturing web'
-myspider = webspider.webspider()
-try:
-    term = 'pantheon 1.2 m around the oculus'
-    n_images = 20
-    i = 1
-    res = myspider.querythisword(term, n_images)
-    print res
-except Exception, e:
-    print 'Caught exception %s, so sleeping for a bit' % (e)
+fp = open("tpc97143e1_fbf3_442a_95d7_c8545b71c10e.txt",'r')
+savedir = "image_search"
+alllines = fp.readlines()
+fp.close()
+n_images = 20
+countdir = 0
+for eachline in alllines:
+    term = eachline
+    dirname = savedir + "/" + ("%04d" % countdir)
+    if not os.path.exists(dirname):
+
+        os.makedirs(dirname)
+    countdir += 1
+    #capturing web
+    #print u'capturing web'
+    print "search: %s" % term
+    myspider = webspider.webspider()
+    try:
+        res = myspider.querythisword(term, n_images)
+        jsonres = json.loads(res)
+        allreturn = []
+        allreturn.extend(jsonres['responseData']['results'])
+        countfile = 0
+        for i,aret in enumerate(allreturn):
+            #print aret
+            filename = dirname + "/" + ("%04d" % countfile) + ".jpg"
+            print filename
+            print aret["tbUrl"]
+            #print "\n"
+            #urllib.urlretrieve(aret["tbUrl"],filename)
+            data = urllib.urlopen(aret["tbUrl"]).read()
+            f = open(filename, 'wb')
+            f.write(data)  
+            f.close()  
+            
+    except Exception, e:
+        print 'Caught exception %s, so sleeping for a bit' % (e)
+
     
