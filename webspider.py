@@ -36,7 +36,7 @@ class webspider:
     #get image list from main web query
     def getimagelist(self,term,n_images):
         queryurl = self.mainweb_head + term + self.mainweb_tail
-        #print queryurl
+        print queryurl
         content = self.openurl(queryurl)
         #print content
         self.imageweblist = re.findall('\"rg_di rg_el ivg-i\"(.*?)<div class="rg_meta">(.*?)</div></div><!--n-->',content,re.S)
