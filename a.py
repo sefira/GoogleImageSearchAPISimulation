@@ -1,11 +1,14 @@
-import urllib
+import urllib,urllib2 
+url   = "http://www.google.com/" 
+proxy = "127.0.0.1:8087"
 
-def download_file(url, filename):
-  print "Downloading file: %s and saving as %s" % (url, filename)
-  file = urllib.URLopener()
-  try:
-    file.retrieve(url, filename)
-  except IOError as (errno, strerror):
-    print "Error: could not download file. %s, %s" % (errno, strerror)
-
-download_file("http://img4.duitang.com/uploads/item/201209/04/20120904031734_wvXyK.thumb.600_0.jpeg", "2.jpg")
+imageurl = "http://images.google.com/images?q=tbn:mbqFtcbw1fkOBM"
+filename = "1.jpg"
+opener = urllib2.build_opener( urllib2.ProxyHandler({"http":proxy}) ) 
+urllib2.install_opener( opener )
+#sContent = urllib2.urlopen(url) 
+#print sContent.read()#data = urllib.urlopen(aret["tbUrl"]).read()
+data = urllib2.urlopen(imageurl).read()
+f = open(filename, 'wb')
+f.write(data)  
+f.close()
