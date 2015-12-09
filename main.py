@@ -43,7 +43,7 @@ try:
         #print u'capturing web'
         print "\nsearch: %s" % term.strip('\n')
         
-#write termfile:
+        #write termfile:
         term_fname = dirname + "/" + 'search_term.txt'
         termfile = open(term_fname,'w')
         print>>termfile,("(%d, \'%s\')" % (countdir,term.strip('\n')))
@@ -52,7 +52,7 @@ try:
         
         myspider = webspider.webspider()
         res = myspider.querythisword(term, n_images)
-        jsonres = json.loads(res)
+        jsonres = json.loads(res.replace("\\","\\\\"))
         allreturn = []
         allreturn.extend(jsonres['responseData']['results'])
 
