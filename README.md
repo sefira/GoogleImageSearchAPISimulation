@@ -1,7 +1,7 @@
 # GoogleImageSearchAPISimulation
 a Google Image Search API Simulation while Google‘s is no longer available.
 
-webspider.py is the API which simulates the google API and return a json-like string.
+webspider.py is the API which simulates the Google API and return a json-like string just like Google did.
 
 main.py import webspider and read the json result.
 
