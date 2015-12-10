@@ -5,5 +5,5 @@ webspider.py is the API which simulates the Google API and return a json-like st
 
 main.py import webspider and read the json result.
 
-I use main.py to query all the lines in "tpc97143e1_fbf3_442a_95d7_c8545b71c10e.txt" 
+I use main.py to query all the lines in "***.txt" in which each line contain a query for Google Image Search
 then download 20 images in every query's result.
